@@ -1,14 +1,12 @@
 import express from 'express';
 import next from 'next';
 import session from 'express-session';
-import connectRedis from 'connect-redis';
 import passport from 'passport';
 import { Strategy as SteamStrategy } from 'passport-steam';
 import redisClient from './utils/redis.js';
+import RedisStore from './utils/redisStore.js';
 import http from 'http';
 import { Server } from 'socket.io';
-
-const RedisStore = connectRedis(session);
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
