@@ -18,9 +18,9 @@ passport.deserializeUser((obj, done) => done(null, obj));
 passport.use(
   new SteamStrategy(
     {
-      returnURL: (process.env.BASE_URL || 'http://localhost:3000') + '/api/auth/steam/return',
-      realm: process.env.BASE_URL || 'http://localhost:3000',
-      apiKey: process.env.STEAM_API_KEY || 'YOUR_STEAM_API_KEY',
+      returnURL: 'https://psychic-space-carnival-r7v9xrq667vcppx6-3000.app.github.dev/api/auth/steam/return',
+      realm: 'https://psychic-space-carnival-r7v9xrq667vcppx6-3000.app.github.dev',
+      apiKey: process.env.STEAM_API_KEY || 'E7F792B59516C902746564DAE69F6BCA',
     },
     (identifier, profile, done) => {
       profile.identifier = identifier;
