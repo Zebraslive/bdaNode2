@@ -16,6 +16,10 @@ def _list_files(folder, exts):
 
 
 class FolderCombinationIterator:
+    def __init__(self):
+        self._index = 0
+        self._last_input = None
+
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -42,13 +46,18 @@ class FolderCombinationIterator:
 
         combos = list(product(images, videos, texts))
         total = len(combos)
-        index = batch_index % total
-        image_path, video_path, text_path = combos[index]
+
+        if self._last_input != batch_index:
+            self._index = batch_index % total
+
+        image_path, video_path, text_path = combos[self._index]
 
         with open(text_path, "r", encoding="utf-8") as f:
             text = f.read()
 
-        next_index = (index + 1) % total
-        return (image_path, video_path, text, next_index, total)
+        self._index = (self._index + 1) % total
+        self._last_input = batch_index
+
+        return (image_path, video_path, text, self._index, total)
 
 

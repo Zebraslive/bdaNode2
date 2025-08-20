@@ -34,6 +34,6 @@ ComfyUI/
 - `text`: text file contents
 - `next_index`: index for the next batch
 - `total_batches`: total number of combinations
-
-Provide the current `batch_index` to select a batch. Feed `next_index` back into
-`batch_index` to iterate through all batches.
+The `batch_index` input sets the starting batch. After the first run, the
+iterator automatically advances the index by one on each execution. Adjust the
+`batch_index` input to reset or jump to a different position.
