@@ -13,7 +13,7 @@ combinations of images, videos and text prompts found in three folders.
    ```bash
    git clone https://example.com/folder-combination-iterator.git
    cd folder-combination-iterator
-   pip install -r requirements.txt  # no extra packages needed
+   pip install -r requirements.txt
    ```
 
 Your `custom_nodes` directory should end up with a structure like:
@@ -29,7 +29,7 @@ ComfyUI/
 ```
 
 ## Node Outputs
-- `image`: selected image file path
+- `image`: loaded image object (compatible with other nodes)
 - `video`: selected video file path
 - `text`: text file contents
 - `next_index`: index for the next batch

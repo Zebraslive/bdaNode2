@@ -1,5 +1,6 @@
 import os
 from itertools import product
+from PIL import Image
 
 IMAGE_EXTS = {'.png', '.jpg', '.jpeg', '.bmp', '.gif', '.webp'}
 VIDEO_EXTS = {'.mp4', '.mov', '.avi', '.mkv', '.webm'}
@@ -31,7 +32,7 @@ class FolderCombinationIterator:
             }
         }
 
-    RETURN_TYPES = ("STRING", "STRING", "STRING", "INT", "INT")
+    RETURN_TYPES = ("IMAGE", "STRING", "STRING", "INT", "INT")
     RETURN_NAMES = ("image", "video", "text", "next_index", "total_batches")
     FUNCTION = "get_batch"
     CATEGORY = "Loaders"
@@ -52,12 +53,15 @@ class FolderCombinationIterator:
 
         image_path, video_path, text_path = combos[self._index]
 
+        with Image.open(image_path) as img:
+            image = img.convert("RGB")
+
         with open(text_path, "r", encoding="utf-8") as f:
             text = f.read()
 
         self._index = (self._index + 1) % total
         self._last_input = batch_index
 
-        return (image_path, video_path, text, self._index, total)
+        return (image, video_path, text, self._index, total)
 
 
